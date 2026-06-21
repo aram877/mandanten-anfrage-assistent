@@ -1,0 +1,41 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint", "import"],
+  "rules": {
+    "import/no-restricted-paths": [
+      "error",
+      {
+        "zones": [
+          {
+            "target": "./src/domain",
+            "from": "./src/application",
+            "message": "Domain layer must not import from Application layer."
+          },
+          {
+            "target": "./src/domain",
+            "from": "./src/infrastructure",
+            "message": "Domain layer must not import from Infrastructure layer."
+          },
+          {
+            "target": "./src/domain",
+            "from": "./src/app",
+            "message": "Domain layer must not import from UI layer."
+          },
+          {
+            "target": "./src/application",
+            "from": "./src/infrastructure",
+            "message": "Application layer must not import from Infrastructure layer."
+          },
+          {
+            "target": "./src/application",
+            "from": "./src/app",
+            "message": "Application layer must not import from UI layer."
+          }
+        ]
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+  }
+}
